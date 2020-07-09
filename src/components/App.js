@@ -1,86 +1,103 @@
 import React from 'react';
-import  Card  from './card';
-import  Navbar  from './navbar';
+import Card from './card';
+import Navbar from './navbar';
 import Column from './column';
-import card from './card';
 import './css/style.css';
 
 export default class App extends React.PureComponent {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      columns:[
+    this.state = {
+      columns: [
         {
-          title:"ÖDEV",
-          cards:[
+          
+          title: "ÖDEV",
+          cards: [
             {
-              personName:"Ödev A",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının.",
+              topicName: "Ödev A",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının.",
             },
             {
-              personName:"Ödev B",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının.",
+              topicName: "Ödev B",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının.",
             },
             {
-              personName:"Ödev c",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir",
+              topicName: "Ödev c",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir",
             }
           ]
         },
         {
-          title:"Sınav",
-          cards:[
+          
+          title: "SINAV",
+          cards: [
             {
-              personName:"Sınav A",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının",
+              topicName: "Sınav A",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının",
             },
             {
-              personName:"Sınav B",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının",
+              topicName: "Sınav B",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının",
             },
             {
-              personName:"Sınav C",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir",
+              topicName: "Sınav C",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir",
             }
 
           ]
         },
         {
-          title:"Proje",
-          cards:[
+          
+          title: "PROJE",
+          cards: [
             {
-              personName:"Proje A",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının.",
+              topicName: "Proje A",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının.",
             },
             {
-              personName:"Proje B",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının.",
+              topicName: "Proje B",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının.",
             },
             {
-              personName:"Proje C",
-              description:"Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir",
+              topicName: "Proje C",
+              description: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir",
             }
           ]
         }
 
       ]
     }
+    this.addColumn = this.addColumn.bind(this);
+     this.addCard=this.addCard.bind(this);
+  }
+
+  addColumn(val) {
+    let updateColumns = this.state.columns;
+    updateColumns.push({ title: val, cards: [] });
+    this.setState({ columns: updateColumns });
+    console.log(updateColumns);
     
   }
+   addCard(vall,descv){
+    let updateCards= this.state.columns;
+    updateCards.push({topicName:vall,description:descv});
+     this.setState({cards:updateCards});
+     console.log(updateCards);
+   }
+
   render() {
-        
+
     return (
       <div className="App">
-        {this.state.columns.map((column, columnIndex) => (
-         <Column
-           column={column} 
-           columnIndex={columnIndex}
-            key={columnIndex} 
-          />
-        ))}
+        <Navbar addColumn={this.addColumn}
+          addCard={this.addCard} 
+        />
+        <Column
+          columns={this.state.columns}
+        />
       </div>
 
-    ); 
+    );
   }
 }
 
